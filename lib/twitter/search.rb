@@ -88,6 +88,7 @@ module Twitter
     
     # If you want to get results do something other than iterate over them.
     def fetch
+      @query[:q] = [@query[:q]] if @query[:q].kind_of? String
       @query[:q] = @query[:q].join(' ')
       SearchResultInfo.new_from_hash(self.class.get('/search.json', {:query => @query}))
     end
